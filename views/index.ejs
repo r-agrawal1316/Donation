@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <title>Donatedotin</title>
+  </head>
+
+  <body>
+    <%- include ('navbar', {displayUser: displayUser}) %>
+    <header>
+      <div id="innercontent" class="commonBox">
+        <h1>Let's Help Those Who Are More In Need</h1>
+        <div class="para">
+          <p id="slogan">
+            “Money is not the only commodity that is fun to give. We can give
+            time we can give our expertise, we can give our love, or simply give
+            a smile. What does that cost? The point is, none of us can ever run
+            out of something worthwhile to give."
+          </p>
+          <p id="auth">-Steve Goodier.</p>
+        </div>
+        <a href="/donate">Donate Now</a>
+      </div>
+    </header>
+    <hr id="first" class="rounded" />
+    <section>
+      <div id="paraBox" class="commonBox">
+        <div id="part1" class="commonBox">
+          <h1>Donate Today</h1>
+          <p>
+            Help without any reason and give without the expectation of
+            receiving anything in return.
+          </p>
+          <a href="/donate" class="commonButton">Donate</a>
+        </div>
+        <hr class="rounded" />
+        <div id="part2" class="commonBox">
+          <h1>Our Donate Plan</h1>
+          <p>
+            Will you donate to help reach more endangered people and their
+            families around the world ?
+          </p>
+        </div>
+      </div>
+      <div class="boxes">
+        <div id="box1" class="boxDesign">
+          <img src="/images/box1_food.png" alt="food" />
+          <h2>Food for a family</h2>
+          <p>
+            Feed each family and make sure no one is left out.Feed them as long
+            as possible.Men, women, the elderly, children are all given food.
+          </p>
+        </div>
+        <div id="box2" class="boxDesign">
+          <img src="/images/box2_shelter.png" alt="food" />
+          <h2>Shelter for a family</h2>
+          <p>
+            Giving them shelters. As if they could all be there.Men, women, the
+            elderly,children all hve the opportunity to stay.
+          </p>
+        </div>
+        <div id="box3" class="boxDesign">
+          <img src="/images/box3_education.png" alt="food" />
+          <h2>Education for a child</h2>
+          <p>
+            Arranging education for children. Children will be able to take care
+            of themselves in the future if they are educated.
+          </p>
+        </div>
+      </div>
+      <br />
+      <hr id="second" class="rounded" />
+      <div class="bigCards">
+        <div id="card1" class="cardDesign">
+          <div id="cimg1"></div>
+          <div class="cardContent">
+            <h1>Their lives depend on your donation</h1>
+            <p>
+              Your donation can save their lives. 2 million people are still at
+              risk. The condition of the children is more dire. They need help
+              very quickly.
+            </p>
+            <p>
+              "A journey of a thousand miles begins with a single step" Take the
+              step to contribute to their lives."
+            </p>
+            <a href="/about">How to contribute?</a>
+          </div>
+        </div>
+        <div>
+          <hr id="third" class="rounded" />
+          <div id="card2" class="cardDesign">
+            <div id="cimg2"></div>
+            <div class="cardContent">
+              <h1>They need us to suvive</h1>
+              <p>
+                They need our help. They will not be able to save their lives
+                without our help.For the sake of humanity, we must come forword
+                to help them.
+              </p>
+              <p>
+                "Your one single step may save someone's life." Take the step to
+                contribute to their lives."
+              </p>
+              <a href="/about">How to contribute?</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr id="fourth" class="rounded" />
+      <div class="news">
+        <h1 class="commonheadingsize">NEWS</h1>
+        <p class="commonsubheadingsize">
+          Here is some reports from the top news agencies.
+        </p>
+      </div>
+      <div id="news-container">
+        <div class="news-item">
+          <img src="..//images/newsBox1.webp" alt="img1" />
+          <div class="news-content">
+            <h1>The Tribune India</h1>
+            <p>
+              Armed conflicts afflicting many parts of the world have taken a
+              huge toll on global poverty...
+            </p>
+            <a href="/">Read More</a>
+          </div>
+        </div>
+        <div class="news-item">
+          <img src="..//images/newsBox2.webp" alt="" />
+          <div class="news-content">
+            <h1>BBC Asia</h1>
+            <p>
+              Chennai rains: Can the city with stand another urban flood?rghu
+              lkjsdl dsfg df ifhli...
+            </p>
+            <a href="/">Read More</a>
+          </div>
+        </div>
+        <div class="news-item">
+          <img src="..//images/newBox3.jpg" alt="img3" />
+          <div class="news-content">
+            <h1>World Economic Forum</h1>
+            <p>
+              Here's how COVID-19 affected education - end how we can get
+              children's learning back on track...
+            </p>
+            <a href="/">Read More</a>
+          </div>
+        </div>
+      </div>
+      <br />
+      <hr class="rounded" />
+      <div class="news">
+        <h1 class="commonheadingsize">Get My Updates</h1>
+        <p class="commonsubheadingsize">
+          To get updates of the endangered people around the world subscribe
+          now.
+        </p>
+      </div>
+      <div
+        id="updateboxouter"
+        style="display: flex; flex-direction: column; padding: 0vw 0vw"
+      >
+        <form
+          action="/emailsub"
+          method="post"
+          id="form"
+          onsubmit="return validate();"
+        >
+          <input
+            type="email"
+            name="Email"
+            id="email"
+            placeholder="example@gmail.com"
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+        <div id="message"></div>
+      </div>
+    </section>
+    <hr class="rounded" />
+    <!-- Footer -->
+    <footer>
+      <div id="pageDetails">
+        <div id="address">
+          <p>
+            BSA College of Engineering and Technology, Mathura(U.P.), 281001
+          </p>
+          <p>+91 639 773 5039, +91 750 523 2183</p>
+          <p>
+            <a href="http://www.bsacet.org/">www.bsacet.org</a>
+          </p>
+        </div>
+        <div id="socialmedia">
+          <p style="color: white; font-size: 1.5vw">Our social plateforms</p>
+          <a href="/"><img src="/images/facebook.png" alt="facebook" /></a>
+          <a href="/"><img src="/images/instagram.png" alt="instaram" /></a>
+          <a href="/"><img src="/images/twitter.png" alt="twitter" /></a>
+          <a href="/"><img src="/images/youtube.png" alt="youtube" /></a>
+        </div>
+      </div>
+      <div id="copyright">
+        Copyright © 2023 Insider Inc. All rights reserved. Registration on or
+        use of this site constitutes acceptance of our Terms of Service, Privacy
+        Policy and Cookies Policy.
+      </div>
+    </footer>
+    <script>
+      let hamburger = document.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", () => {
+        let navBar = document.querySelector(".nav-bar");
+        navBar.classList.toggle("active");
+        let line1 = document.querySelector(".line1");
+        line1.classList.toggle("single-line");
+        let line2 = document.querySelector(".line2");
+        line2.classList.toggle("single-line");
+      });
+
+      var clickMenu = document.getElementById("clickMenu");
+      var dropLogout = document.getElementById("drop-logout");
+
+      clickMenu.onclick = () => {
+        if (dropLogout.style.display == "none") {
+          dropLogout.style.display = "block";
+          dropLogout.style.position = "inherit";
+          dropLogout.style.top = "51px";
+          dropLogout.style.backgroundColor = "#2dcbff";
+          dropLogout.style.padding = "10px";
+          dropLogout.style.width = "130px";
+        } else {
+          dropLogout.style.display = "none";
+        }
+      };
+
+      function validate() {
+        var update = document.getElementById("message");
+        update.style.backgroundColor = "green";
+        var text = "Thank you for subscription";
+        update.innerHTML = text;
+        return true;
+      }
+    </script>
+  </body>
+</html>

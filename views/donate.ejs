@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&family=Lobster&family=Poppins&family=Roboto:wght@500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/donation.css">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+
+<body>
+  <%- include ('navbar', {displayUser: displayUser}) %>
+    <main>
+      <div class="container">
+        <h1>Contribute for the World</h1>
+        <p>Donate for the cause of your choice.</br>We will ensure that your contribution reaches trustable NGOs.</p>
+        <div class="donation-box">
+          <div class="money-donate">
+            <div id="error_message">
+
+            </div>
+            <h3>Donate Money</h3>
+            <form method="post" id="form">
+              <div id="dnte-shw">
+                <div id="name-shw"></div>
+                <div id="amount-shw"></div>
+              </div>
+              <div id="dnte-frm">
+                <div class="input-row">
+                  <div class="input-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name1" name="Name" placeholder="Enter Name">
+                  </div>
+                  <div class="input-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone1" name="Phone" placeholder="9999999999">
+                  </div>
+                </div>
+                <div class="input-row">
+                  <div class="input-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" name="Amount" placeholder="₹25-25000">
+                  </div>
+                  <div class="input-group">
+                    <label for="purpose">Choose your purpose</label>
+                    <select id="purpose" name="Purpose">
+                      <option value="Education">Education</option>
+                      <option value="Disaster Relief">Disaster Relief</option>
+                      <option value="Food For Needy">Food for Needy</option>
+                      <option value="Animal">Animal Care</option>
+                      <option value="Environment">Environment</option>
+                      <option value="Elder Care">Elder Care</option>
+                    </select>
+                  </div>
+                </div>
+                <button type='button' class="common-button" onclick="validate1()">Next</button>
+              </div>
+              <div class="input-group" id="card-display">
+                <div id="card-element"></div>
+                <div id="card-errors"></div>
+                <button id="donate-button" class="common-button" type="submit">DONATE</button>
+              </div>
+            </form>
+          </div>
+          <div class="other-donate">
+            <div id="error_message2">
+
+            </div>
+            <h3>Donate other goods</h3>
+            <form action="/donategoods" method="post" id="form1" enctype="multipart/form-data"
+              onsubmit="return validate2();">
+              <div class="input-row">
+                <div class="input-group">
+                  <label for="name2">Name</label>
+                  <input type="text" id="name2" name="Name" placeholder="Enter Name">
+                </div>
+                <div class="input-group">
+                  <label for="address">Address</label>
+                  <input type="text" id="address2" name="Address" placeholder="Enter address">
+                </div>
+              </div>
+              <div class="input-row">
+                <div class="input-group">
+                  <label for="options">Select from options</label>
+                  <select id="options" name="Options">
+                    <option value="Books">Books</option>
+                    <option value="Food">Food</option>
+                    <option value="Clothes">Clothes</option>
+                  </select>
+                </div>
+                <div class="input-group">
+                  <label for="img">Select image:</label>
+                  <input type="file" id="img" name="Images" accept="image/*">
+                </div>
+              </div>
+              <button class='common-button' type="submit">SUBMIT</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    </section>
+    <!-- Footer -->
+    <footer>
+      <div id="pageDetails">
+        <div id="address">
+          <p>
+            BSA College of Engineering and Technology, Mathura(U.P.), 281001
+          </p>
+          <p>
+            +91 639 773 5039, +91 750 523 2183 
+          </p>
+          <p>
+            <a href="http://www.bsacet.org/">www.bsacet.org</a>
+          </p>
+        </div>
+        <div id="socialmedia">
+          <p style="color: white; font-size: 1.5vw;">Our social platforms</p>
+          <a href="/"><img src="/images/facebook.png" alt="facebook"></a>
+          <a href="/"><img src="/images/instagram.png" alt="instaram"></a>
+          <a href="/"><img src="/images/twitter.png" alt="twitter"></a>
+          <a href="/"><img src="/images/youtube.png" alt="youtube"></a>
+        </div>
+      </div>
+      <div id="copyright">
+        Copyright © 2023 Insider Inc. All rights reserved. Registration on or use of this site constitutes
+        acceptance of our Terms of Service, Privacy Policy and Cookies Policy.
+      </div>
+    </footer>
+    <script>
+      let cardDisplay = document.getElementById("card-display")
+      let dnte = document.getElementById("dnte-frm")
+      let dnteShw = document.getElementById("dnte-shw")
+      cardDisplay.style.display = 'none';
+      dnte.style.display = 'block';
+      dnteShw.style.display = 'none';
+      var clickMenu = document.getElementById("clickMenu");
+      var dropLogout = document.getElementById("drop-logout");
+
+      clickMenu.onclick = () => {
+        if (dropLogout.style.display == "none") {
+          dropLogout.style.display = "block";
+          dropLogout.style.position = "inherit;";
+          dropLogout.style.top = "51px";
+          dropLogout.style.backgroundColor = "#2dcbff";
+          dropLogout.style.padding = "10px";
+          dropLogout.style.width = "130px";
+        }
+        else {
+          dropLogout.style.display = "none";
+
+        }
+      }
+
+      let Name;
+      let Amount;
+
+      function validate1() {
+        Name = document.getElementById("name1").value;
+        Amount = document.getElementById("amount").value;
+        var phone = document.getElementById("phone1").value;
+        var error_message = document.getElementById("error_message");
+        var form = document.getElementById("form");
+        var qrCode = document.getElementById('qr-code')
+        var nameShw = document.getElementById('name-shw')
+        var amountShw = document.getElementById('amount-shw')
+
+        var text;
+        if (Name.length == 0) {
+          text = "Please Enter valid Name";
+          error_message.style.padding = "10px";
+          error_message.innerHTML = text;
+          return;
+        }
+        if (isNaN(phone) || phone.length != 10) {
+          text = "Please Enter valid Phone Number";
+          error_message.style.padding = "10px";
+          error_message.innerHTML = text;
+          return;
+        }
+        if (Amount < 25) {
+          text = "Please Enter Amount more than 25";
+          error_message.style.padding = "10px";
+          error_message.innerHTML = text;
+          return;
+        }
+        error_message.innerHTML = ""
+        error_message.style.padding = '0px';
+        nameShw.innerHTML = `<b>Name:</b> ${Name}`;
+        amountShw.innerHTML = `<b>Amount:</b> ${Amount}`;
+        dnteShw.style.display = 'flex'
+        cardDisplay.style.display = 'block';
+        dnte.style.display = 'none';
+      }
+
+      function validate2() {
+        var name = document.getElementById("name2").value;
+        var address = document.getElementById("address2").value;
+        var option = document.getElementById("options").value;
+
+        var error_message2 = document.getElementById("error_message2");
+
+        error_message2.style.padding = "10px";
+
+        var text;
+        if (name.length == 0) {
+          text = "Please Enter valid Name";
+          error_message2.innerHTML = text;
+          return false;
+        }
+        if (address.length == 0) {
+          text = "Please Enter valid Address";
+          error_message2.innerHTML = text;
+          return false;
+        }
+
+        error_message2.style.backgroundColor = "green";
+        text = "Thanks for submiting form. Our agent will pick those " + option + " Soon..";
+        error_message2.innerHTML = text;
+        return true;
+      }
+
+      let hamburger = document.querySelector(".hamburger")
+
+      hamburger.addEventListener("click", () => {
+        let navBar = document.querySelector(".nav-bar");
+        navBar.classList.toggle("active")
+        let line1 = document.querySelector(".line1");
+        line1.classList.toggle("single-line")
+        let line2 = document.querySelector(".line2");
+        line2.classList.toggle("single-line")
+      })
+
+      const stripe = Stripe('pk_test_51NcUE4SJJCAWoBBslrBh7caKHcP2KBAxQ8OzMVQFIQkofhUjoMgRQwKS0TLNgMevtoznX13urNsLTh4VMyRP28UA00B616d7jU');
+      const elements = stripe.elements();
+      const cardElement = elements.create('card', {
+        hidePostalCode: true,
+      });
+      cardElement.mount('#card-element');
+      document.getElementById('card-element').style.display = 'block';
+
+      cardElement.on('change', (event) => {
+        const errorElement = document.getElementById('card-errors');
+        if (event.error) {
+          errorElement.textContent = event.error.message;
+          document.getElementById('donate-button').style.display = 'none';
+
+        } else {
+          errorElement.textContent = '';
+          document.getElementById('donate-button').style.display = 'block';
+        }
+      });
+
+      document.getElementById('form').addEventListener('submit', handleDonateSubmit);
+      async function handleDonateSubmit(event) {
+        event.preventDefault();
+
+        const Name = document.getElementById('name1').value;
+        const Amount = document.getElementById('amount').value;
+        const Phone = document.getElementById('phone1').value;
+        const Purpose = document.getElementById('purpose').value;
+        const error_message = document.getElementById('error_message');
+        error_message.style.backgroundColor = "red";
+        error_message.style.padding = '10px'
+        error_message.innerHTML = "Loading...";
+
+        const response = await fetch('/create-payment-intent', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ Amount }),
+        });
+
+        const data = await response.json();
+
+        const result = await stripe.confirmCardPayment(data.clientSecret, {
+          payment_method: {
+            card: cardElement,
+          },
+        });
+
+        if (result.error) {
+          console.error(result.error.message);
+        } else {
+          error_message.style.backgroundColor = "green";
+          error_message.style.padding = '10px'
+          error_message.innerHTML = "Payment Successful!!!......Redirecting!!!";
+          console.log(data.paymentId);
+          const resp = await fetch('/donatemoney', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ Name, Phone, Amount, Purpose, paymentId: data.paymentId}),
+          });
+          const link = await resp.json();
+          window.location.href = link.receiptLink;
+          setTimeout(() => {
+            window.location.href = '/donate';
+          }, 4000);
+        }
+      }
+    </script>
+</body>
+
+</html>

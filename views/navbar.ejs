@@ -1,0 +1,38 @@
+<div class="header-nav">
+  <div>
+    <a href="/">
+      <div id="navlogo">
+        <span>donate.in</span>
+        <img src="/images/logo.png" alt="Donate" />
+        <p>Charity ends poverty</p>
+      </div>
+    </a>
+  </div>
+  <div class="hamburger">
+    <div class="line line1"></div>
+    <div class="line"></div>
+    <div class="line line2"></div>
+  </div>
+
+  <div class="nav-bar">
+    <ul>
+      <li><a href="/" class="active">Home</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/donate">Donate</a></li>
+      <% if (isLoggedIn) { %>
+      <li>
+        <div class="drop-content">
+          <p class="name">Welcome, <%= displayUser %></p>
+          <img id="clickMenu" src="..//images/dropdown.png" />
+        </div>
+        <div id="drop-logout">
+          <a href="/logout" id="lg">Logout</a>
+        </div>
+      </li>
+      <% } else { %>
+      <li><a href="/login">Login</a></li>
+      <% } %>
+    </ul>
+  </div>
+</div>

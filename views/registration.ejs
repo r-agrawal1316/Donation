@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <title>Registration</title>
+  </head>
+
+  <body>
+    <%- include ('navbar') %>
+    <header></header>
+    <div class="foot" id="r-foot"></div>
+    <div class="center" id="r-center">
+      <div id="error_message"><%= isCorrect%></div>
+      <h1>Registration</h1>
+      <form method="post" id="form">
+        <div id="regi">
+          <div class="txt-field">
+            <input type="text" name="Name" id="name" required />
+            <span></span>
+            <label>Name</label>
+          </div>
+          <div class="txt-field">
+            <input type="text" name="Username" id="username" required />
+            <span></span>
+            <label>Username</label>
+          </div>
+          <div class="txt-field">
+            <input type="email" name="Email" id="email" required />
+            <span></span>
+            <label>E-Mail</label>
+          </div>
+          <div class="txt-field">
+            <input type="password" name="Password" id="password" required />
+            <span></span>
+            <label>Password</label>
+          </div>
+          <div class="txt-field">
+            <input type="password" name="cnf_pass" id="cnf_pass" required />
+            <span></span>
+            <label>Confirm Password</label>
+          </div>
+          <button class="common-button" type="button" onclick="validate()">
+            Submit
+          </button>
+        </div>
+        <div id="opt-verification" class="txt-field">
+          <input type="text" id="otp" name="otp" required />
+          <span></span>
+          <label for="otp">Enter OTP:</label>
+        </div>
+        <button
+          class="common-button"
+          id="opt-button"
+          type="button"
+          onclick="verifyEmail()"
+        >
+          Submit
+        </button>
+        <div class="signup_link">
+          Already a member? <a href="/login">Login</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer-->
+    <footer>
+      <div id="pageDetails">
+        <div id="address">
+          <p>
+            BSA College of Engineering and Technology, Mathura(U.P.), 281001
+          </p>
+          <p>+91 639 773 5039, +91 750 523 2183</p>
+          <p>
+            <a href="http://www.bsacet.org/">www.bsacet.org</a>
+          </p>
+        </div>
+        <div id="socialmedia">
+          <p style="color: white; font-size: 1.5vw">Our social plateforms</p>
+          <a href="/"><img src="/images/facebook.png" alt="facebook" /></a>
+          <a href="/"><img src="/images/instagram.png" alt="instagram" /></a>
+          <a href="/"><img src="/images/twitter.png" alt="twitter" /></a>
+          <a href="/"><img src="/images/youtube.png" alt="youtube" /></a>
+        </div>
+      </div>
+      <div id="copyright">
+        Copyright © 2023 Insider Inc. All rights reserved. Registration on or
+        use of this site constitutes acceptance of our Terms of Service, Privacy
+        Policy and Cookies Policy.
+      </div>
+    </footer>
+    <script>
+      var error_message = document.getElementById("error_message");
+      const regi = document.getElementById("regi");
+      const otpVerification = document.getElementById("opt-verification");
+      const otpButton = document.getElementById("opt-button");
+      regi.style.display = "block";
+      otpVerification.style.display = "none";
+      otpButton.style.display = "none";
+
+      async function sendOTPAndRegister(Name, Username, Email, Password) {
+        const resp = await fetch("/registration", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ Name, Email, Password, Username }),
+        });
+        return resp;
+      }
+
+      async function verifyEmail() {
+        var Email = document.getElementById("email").value;
+        var otp = document.getElementById("otp").value;
+        const resp = await fetch("/confirmEmail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ Email, otp }),
+        });
+        error_message.style.backgroundColor = "green";
+        error_message.innerHTML = "Email confirmed!!";
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000);
+      }
+
+      function validate() {
+        error_message.innerHTML = "Loading...";
+        var name = document.getElementById("name").value;
+        var pass = document.getElementById("password").value;
+        var cnfpass = document.getElementById("cnf_pass").value;
+        var uname = document.getElementById("username").value;
+        var email = document.getElementById("email").value;
+        var passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z]).{8,}$/;
+
+        var text;
+        if (name.length < 3) {
+          error_message.style.padding = "10px";
+          text = "Name is too short";
+          error_message.innerHTML = text;
+          return false;
+        }
+        if (uname.length < 6) {
+          text = "Username is too short ";
+          error_message.style.padding = "10px";
+          error_message.innerHTML = text;
+          return false;
+        }
+        if (email.indexOf("@") == -1 || email.length < 6) {
+          text = "Please Enter valid Email";
+          error_message.style.padding = "10px";
+          error_message.innerHTML = text;
+          return false;
+        }
+        if (!passwordRegex.test(pass)) {
+          text =
+            "Password must contain at least one letter, one digit, and be at least 8 characters long.";
+          error_message.style.padding = "10px";
+          error_message.innerHTML = text;
+          return false;
+        }
+        if (cnfpass !== pass) {
+          text = "Password and confirm password do not match";
+          error_message.innerHTML = text;
+          return false;
+        }
+
+        sendOTPAndRegister(name, uname, email, pass).then(() => {
+          error_message.style.backgroundColor = "green";
+          error_message.innerHTML =
+            "OTP has been sent to your registered email!!";
+          regi.style.display = "none";
+          otpVerification.style.display = "block";
+          otpButton.style.display = "block";
+        });
+      }
+
+      let hamburger = document.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", () => {
+        let navBar = document.querySelector(".nav-bar");
+        navBar.classList.toggle("active");
+        let line1 = document.querySelector(".line1");
+        line1.classList.toggle("single-line");
+        let line2 = document.querySelector(".line2");
+        line2.classList.toggle("single-line");
+      });
+    </script>
+  </body>
+</html>

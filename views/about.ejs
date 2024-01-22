@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/about.css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <title>About</title>
+  </head>
+
+  <body>
+    <%- include ('navbar', {displayUser: displayUser}) %>
+    <section>
+      <div class="bigCards">
+        <h1>About Us</h1>
+        <hr class="rounded" />
+        <div id="card2" class="cardDesign">
+          <div id="cimg2"></div>
+          <div class="cardContent">
+            <p>
+              Our goal is to help human as well as animals. We act as a reliable
+              medium between Donors and NGOs.
+            </p>
+            <p>
+              We appreciate the efforts of people who want to aid others and
+              strive to help them.
+            </p>
+            <p>
+              We plan to assotiate ourselves with various type of Charity
+              organisations like educational, child care, disaster relief etc.
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr class="rounded" />
+      <br />
+      <div class="boxes">
+        <div id="box1" class="boxDesign">
+          <h2><u>Our Services</u></h2>
+          <ul>
+            <li>Water Surve</li>
+            <li>Education for all</li>
+            <li>Food Serving</li>
+            <li>Animal aid</li>
+          </ul>
+        </div>
+        <div id="box2" class="boxDesign">
+          <h2><u>Our goals</u></h2>
+          <ul>
+            <li>To aid organisations</li>
+            <li>Tackling Poverty</li>
+            <li>Make Big Impact</li>
+            <li>Unite The Society</li>
+          </ul>
+        </div>
+        <div id="box3" class="boxDesign">
+          <h2><u>Our Partners</u></h2>
+          <ul>
+            <li>Oxfam</li>
+            <li>Save the children</li>
+            <li>Fund Doctors without borders</li>
+            <li>HelpAge India and more</li>
+          </ul>
+        </div>
+      </div>
+      <br />
+      <hr class="rounded" />
+      <div class="news">
+        <h1 class="commonheadingsize">Get My Updates</h1>
+        <p class="commonsubheadingsize">
+          To get updates of the endangered people around the world subscribe
+          now.
+        </p>
+      </div>
+      <div
+        id="updateboxouter"
+        style="display: flex; flex-direction: column; padding: 1vw 0vw"
+      >
+        <form
+          action="/emailsub"
+          method="post"
+          id="form"
+          onsubmit="return validate();"
+        >
+          <input
+            type="email"
+            name="Email"
+            id="email"
+            placeholder="example@gmail.com"
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+        <div id="message"></div>
+      </div>
+    </section>
+    <hr class="rounded" />
+    <footer>
+      <div id="pageDetails">
+        <div id="address">
+          <p>
+            BSA College of Engineering and Technology, Mathura(U.P.), 281001
+          </p>
+          <p>+91 639 773 5039, +91 750 523 2183</p>
+          <p>
+            <a href="http://www.bsacet.org/">www.bsacet.org</a>
+          </p>
+        </div>
+        <div id="socialmedia">
+          <p style="color: white; font-size: 1.5vw">Our social plateforms</p>
+          <a href="/"><img src="/images/facebook.png" alt="facebook" /></a>
+          <a href="/"><img src="/images/instagram.png" alt="instaram" /></a>
+          <a href="/"><img src="/images/twitter.png" alt="twitter" /></a>
+          <a href="/"><img src="/images/youtube.png" alt="youtube" /></a>
+        </div>
+      </div>
+      <div id="copyright">
+        Copyright © 2023 Insider Inc. All rights reserved. Registration on or
+        use of this site constitutes acceptance of our Terms of Service, Privacy
+        Policy and Cookies Policy.
+      </div>
+    </footer>
+    <script>
+      let hamburger = document.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", () => {
+        let navBar = document.querySelector(".nav-bar");
+        navBar.classList.toggle("active");
+        let line1 = document.querySelector(".line1");
+        line1.classList.toggle("single-line");
+        let line2 = document.querySelector(".line2");
+        line2.classList.toggle("single-line");
+      });
+      var clickMenu = document.getElementById("clickMenu");
+      var dropLogout = document.getElementById("drop-logout");
+
+      clickMenu.onclick = () => {
+        if (dropLogout.style.display == "none") {
+          dropLogout.style.display = "block";
+          dropLogout.style.position = "inherit";
+          dropLogout.style.top = "51px";
+          dropLogout.style.backgroundColor = "#2dcbff";
+          dropLogout.style.padding = "10px";
+          dropLogout.style.width = "130px";
+        } else {
+          dropLogout.style.display = "none";
+        }
+      };
+      function validate() {
+        var update = document.getElementById("message");
+        var text = "Thank you for subscription";
+        update.innerHTML = text;
+        return true;
+      }
+    </script>
+  </body>
+</html>

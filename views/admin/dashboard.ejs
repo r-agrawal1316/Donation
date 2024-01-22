@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body onload="show()">
+    <%- include('../admin-navbar', {displayUser: displayUser}) %>
+    <div class="dashboard">
+      <h1>Dashboard</h1>
+      <hr />
+      <div class="dashboard-summary">
+        <div class="summary-card1" id="SuCa-box">
+          <h2><u>Total Users</u></h2>
+          <p><%= totalUsers %></p>
+        </div>
+        <div class="summary-card2">
+          <h2><u>Total Donation</u></h2>
+          <p>₹ <%= totalDonation %></p>
+        </div>
+      </div>
+      <hr />
+      <div class="dashboard-chart">
+        <h2><u>Total Donations Per Day</u></h2>
+        <label for="dateSelect"><b>Select Date:</b></label>
+        <input type="date" id="dateSelect" onchange="getDataForDate()" />
+        <canvas id="donationChart" width="400" height="600"></canvas>
+      </div>
+    </div>
+    <footer>
+      <div id="pageDetails">
+        <div id="address">
+          <p>
+            BSA College of Engineering and Technology, Mathura(U.P.), 281001
+          </p>
+          <p>+91 639 773 5039, +91 750 523 2183</p>
+          <p>
+            <a href="http://www.bsacet.org/">www.bsacet.org</a>
+          </p>
+        </div>
+        <div id="socialmedia">
+          <p style="color: white; font-size: 1.5vw">Our social plateforms</p>
+          <a href="/"><img src="/images/facebook.png" alt="facebook" /></a>
+          <a href="/"><img src="/images/instagram.png" alt="instaram" /></a>
+          <a href="/"><img src="/images/twitter.png" alt="twitter" /></a>
+          <a href="/"><img src="/images/youtube.png" alt="youtube" /></a>
+        </div>
+      </div>
+      <div id="copyright">
+        Copyright © 2023 Insider Inc. All rights reserved. Registration on or
+        use of this site constitutes acceptance of our Terms of Service, Privacy
+        Policy and Cookies Policy.
+      </div>
+    </footer>
+    <script>
+      const dateData = <%- JSON.stringify(donationData) %>;
+      console.log(dateData);
+      function show() { renderBarGraph(dateData); }
+
+      function getDataForDate() {
+          const selectedDate = document.getElementById("dateSelect").value;
+          fetch(`/admin/dashboard/${selectedDate}`)
+              .then(response => response.json())
+              .then(data => {
+                  console.log(data);
+                  renderBarGraph(data);
+              })
+              .catch(error => console.error('Error fetching data:', error));
+      }
+      let chart;
+      function renderBarGraph(dateData) {
+          const ctx = document.getElementById('donationChart').getContext('2d');
+          if (chart) {
+              chart.destroy();
+          }
+          chart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: dateData.dates,
+                  datasets: [{
+                      label: 'Total Donation',
+                      data: dateData.totals,
+                      backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                      borderColor: 'rgba(75, 192, 192, 1)',
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  responsive: false, // Adjust as needed
+                  scales: {
+                      x: {
+                          display: true,
+                          title: {
+                              display: true,
+                              text: 'Date',
+                              font: {
+                                  size: 14,
+                                  weight: 'bold',
+                              }
+                          }
+                      },
+                      y: {
+                          display: true,
+                          title: {
+                              display: true,
+                              text: 'Money',
+                              font: {
+                                  size: 14,
+                                  weight: 'bold',
+                              }
+                          },
+                          beginAtZero: true,
+                          ticks: {
+                              callback: function (value) {
+                                  return '₹' + value; // Add currency symbol (₹) to the tick labels
+                              }
+                          }
+                      }
+                  }
+              }
+          });
+      }
+
+      let hamburger = document.querySelector(".hamburger")
+
+      hamburger.addEventListener("click", () => {
+          let navBar = document.querySelector(".nav-bar");
+          navBar.classList.toggle("active")
+          let line1 = document.querySelector(".line1");
+          line1.classList.toggle("single-line")
+          let line2 = document.querySelector(".line2");
+          line2.classList.toggle("single-line")
+      })
+
+      var clickMenu = document.getElementById("clickMenu");
+      var dropLogout = document.getElementById("drop-logout");
+
+      clickMenu.onclick = () => {
+          if (dropLogout.style.display == "none") {
+              dropLogout.style.display = "block";
+              dropLogout.style.position = "inherit;";
+              dropLogout.style.top = "51px";
+              dropLogout.style.backgroundColor = "#2dcbff";
+              dropLogout.style.padding = "10px";
+              dropLogout.style.width = "130px";
+          }
+          else {
+              dropLogout.style.display = "none";
+
+          }
+      }
+    </script>
+  </body>
+</html>

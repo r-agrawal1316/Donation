@@ -1,0 +1,607 @@
+@import url('https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap');
+
+.header-nav {
+  font-family: "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "Helvetica Neue",
+    "Helvetica", "Arial", "sans-serif";
+  z-index: 2;
+  top: 0;
+  position: sticky;
+  height: 50px;
+  background-color: #2dcbff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.hamburger {
+  display: none;
+}
+
+.nav-bar ul {
+  display: flex;
+}
+
+.nav-bar ul li a {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px 25px;
+  border-radius: 8px;
+  margin: 0 5px;
+  transition: 0.3s;
+}
+
+.drop-content {
+  display: flex;
+  color: white;
+  align-items: center;
+}
+
+.drop-content img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.drop-content:hover {
+  color: #2dcbff;
+  background-color: #ffffff;
+}
+
+#drop-logout {
+  display: none;
+}
+
+#lg:hover {
+  color: rgb(218, 218, 218);
+  background-color: #2dcbff;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px 25px;
+  border-radius: 8px;
+  margin: 0 5px;
+  padding-right: 5px;
+  transition: 0.3s;
+}
+
+.nav-bar ul li a:hover {
+  color: #2dcbff;
+  background-color: #ffffff;
+}
+
+.nav-cta {
+  color: white;
+  font-weight: 600;
+  padding: 13px 20px;
+  border-radius: 5px;
+  transition: 0.4s;
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    font-size: 43px !important;
+  }
+
+  .container {
+    margin-top: -50px !important;
+    text-align: center;
+    width: 100% !important;
+    height: 100%;
+  }
+
+  .container p {
+    margin: -10px 0px 24px !important;
+  }
+
+  #qr-code h1 {
+    font-size: 24px !important;
+  }
+
+  #qr {
+    width: 200px;
+    height: 200px;
+  }
+
+  #address {
+    width: 50vw !important;
+    font-size: 2.8vw !important;
+    color: white !important;
+  }
+
+  #socialmedia {
+    width: 40vw !important;
+    display: flex !important;
+    align-items: center !important;
+    border-left: 1px solid white !important;
+    padding: 2vw !important;
+  }
+
+  #socialmedia p {
+    font-size: 3vw !important;
+  }
+
+  #copyright {
+    font-size: 2.5vw !important;
+    text-align: center !important;
+    padding: 0.3vw !important;
+  }
+
+  #socialmedia img {
+    filter: invert(1) !important;
+    width: 7.5vw !important;
+  }
+
+  label {
+    display: flex !important;
+    margin-left: -2vw;
+  }
+
+  select {
+    margin-right: 34px;
+    margin-left: 0px !important;
+  }
+
+  .donation-box {
+    flex-direction: column;
+    border: none !important;
+    width: 100% !important;
+  }
+
+  .money-donate {
+    padding: 10px 10px !important;
+    border: 1px solid gray;
+    border-radius: 11px;
+    margin: 0px 10px 0px 10px;
+  }
+
+  .other-donate {
+    padding: 10px 10px !important;
+    border: 1px solid gray;
+    border-radius: 11px;
+    margin: 5vh 10px 0px 10px;
+  }
+
+  .other-donate h3 {
+    margin-top: 23px !important;
+  }
+
+  button {
+    margin-left: 0px !important;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .header-nav {
+    font-family: "SF Pro Text", "Myriad Set Pro", "SF Pro Icons",
+      "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+    z-index: 2;
+    top: 0;
+    position: sticky;
+    height: 44px;
+    background-color: #2dcbff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+
+  .hamburger .line {
+    width: 30px;
+    height: 3px;
+    border-radius: 50px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.3s;
+  }
+
+  .nav-bar {
+    height: 0;
+    position: absolute;
+    top: 31px;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    transition: 0.5s;
+    overflow: hidden;
+    background-color: #2dcbff;
+  }
+
+  .nav-bar.active {
+    background-color: #2dcbff;
+    height: 284px;
+    backdrop-filter: blur(4.5px);
+  }
+
+  input {
+    margin-left: -15px;
+  }
+
+  .logo {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .nav-bar ul {
+    color: rgb(31, 31, 31);
+    display: block;
+    width: fit-content;
+    background-color: #2dcbff;
+    margin: 30px auto 0 auto;
+    text-align: center;
+    transition: 0.3s;
+    opacity: 0;
+  }
+
+  .nav-bar.active ul {
+    opacity: 1;
+  }
+
+  .nav-bar ul li a {
+    margin-bottom: 12px;
+  }
+
+  .nav-cta {
+    display: none;
+  }
+
+  .single-line {
+    display: none;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .column {
+    width: 100%;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #navlogo span {
+    font-size: 5vw !important;
+  }
+
+  #navlogo img {
+    height: 5vw !important;
+  }
+
+  #navlogo p {
+    font-size: 3.2vw !important;
+  }
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.commonheadingsize {
+  font-size: 2.5vw;
+  font-weight: bold;
+}
+
+.commonsubheadingsize {
+  font-size: 1.4vw;
+  font-weight: 500;
+}
+
+.commonBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+li {
+  text-align: center;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+/* Navbar CSS started*/
+
+.navbar {
+  font-family: "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  display: flex;
+  position: sticky;
+  top: 0;
+  background-color: #2dcbff;
+  justify-content: space-between;
+  align-items: center;
+  height: 4vw;
+  z-index: 2;
+}
+
+#navlogo {
+  height: 1.5vw;
+  display: flex;
+  margin-left: 0vw;
+  padding: 1vw;
+  justify-content: center;
+  align-items: center;
+}
+
+#navlogo img {
+  height: 2vw;
+  filter: grayscale(1)invert(1)brightness(2);
+  margin-left: 0.45vw;
+  margin-right: 0.9vw;
+}
+
+#navlogo span {
+  font-weight: bold;
+  font-size: 2vw;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+#navlogo p {
+  border-left: 0.7px solid rgba(255, 255, 255, 0.849);
+  padding: 0.6vw 0vw;
+  padding-left: 1.2vw;
+  font-size: 1.2vw;
+  font-weight: lighter;
+}
+
+#navlinks {
+  margin-right: 0.5vw;
+}
+
+#navlinks ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#navlinks li a {
+  margin: 0px 0.3vw;
+  padding: 0.3vw 0.5vw;
+  font-size: 1.4vw;
+}
+
+#navlinks li a:hover {
+  background-color: white;
+  color: #2dcbff;
+  box-shadow: 0px 0px 5px rgb(51, 136, 247);
+  border-radius: 0.3vw;
+}
+
+.container {
+  width: 80%;
+  padding-bottom: 100px;
+  padding-top: 50px;
+  margin: 50px auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+h1 {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.container p {
+  margin-bottom: 40px;
+  font-size: 22px;
+  color: gray;
+}
+
+.donation-box {
+  background: #fff;
+  display: flex;
+  border: #0a0b14 1px solid;
+  border-radius: 5px;
+}
+
+.money-donate {
+  flex-basis: 50%;
+  padding: 40px 60px;
+}
+
+.other-donate {
+  flex-basis: 50%;
+  padding: 40px;
+  color: black;
+  border-left: 1px solid black;
+}
+
+.input-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.input-row .input-group {
+  flex-basis: 45%;
+}
+
+input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  padding-bottom: 5px;
+  color: black;
+}
+
+label {
+  margin-bottom: 6px;
+  display: block;
+  color: black;
+}
+
+#dnte-shw {
+  width: 100%;
+  justify-content: space-between;
+  font-size: 1.3vw;
+  margin: 3.7vw 0 5vw 0;
+}
+
+.common-button {
+  background-color: #2dcbff;
+  width: 100px;
+  border: 1px solid rgb(90, 90, 90);
+  outline: none;
+  color: #fff;
+  height: 35px;
+  border-radius: 30px;
+  margin-top: 20px;
+  margin-left: 145px;
+  cursor: pointer;
+}
+
+.common-button:hover {
+  background-color: white;
+  box-shadow: 0vw 0vw 0.4vw 0.1vw white;
+  color: #2dcbff;
+}
+
+.money-donate h3 {
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.other-donate h3 {
+  font-weight: 600;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+select {
+  background-color: #2dcbff;
+  width: 90px;
+  border: 1px solid black;
+  outline: none;
+  color: #fff;
+  height: 30px;
+  border-radius: 5px;
+  text-align: center;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+select:hover {
+  background-color: white;
+  box-shadow: 0vw 0vw 0.4vw 0.1vw white;
+  color: #2dcbff;
+}
+
+option {
+  color: white;
+  background-color: black;
+  border-radius: 10px;
+}
+
+input {
+  border-radius: 4px;
+  height: 25px;
+}
+
+#error_message {
+  margin-bottom: 20px;
+  background: #fe8b8e;
+  padding: 0px;
+  text-align: center;
+  font-size: 14px;
+  transition: all 0.5s ease;
+}
+
+#error_message2 {
+  margin-bottom: 20px;
+  background: #fe8b8e;
+  padding: 0px;
+  text-align: center;
+  font-size: 14px;
+  transition: all 0.5s ease;
+}
+
+/* footer started */
+
+footer {
+  display: flex;
+  flex-direction: column;
+  background-color: #2dcbff;
+  width: 100%;
+}
+
+#pageDetails {
+  display: flex;
+  justify-content: space-between;
+  padding: 2vw;
+}
+
+#address {
+  width: 25vw;
+  font-size: 1.2vw;
+  color: white;
+}
+
+#socialmedia {
+  width: 23vw;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid white;
+  padding: 2vw;
+}
+
+#socialmedia img {
+  filter: invert(1);
+  width: 3.5vw;
+}
+
+#copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  font-size: 1vw;
+  color: white;
+  padding: 0.6vw;
+}
+
+/* footer ended */

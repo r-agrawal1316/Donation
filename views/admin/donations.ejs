@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donations</title>
+    <link rel="stylesheet" href="/css/donations.css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+  </head>
+
+  <body>
+    <%- include('../admin-navbar', {displayUser: displayUser}) %>
+    <div class="donation-page">
+      <div class="donate-money">
+        <h3>Money donation List</h3>
+        <table>
+          <thead>
+            <tr>
+              <td>S.no.</td>
+              <td>Name</td>
+              <td>Date</td>
+              <td>Purpose</td>
+              <td>Amount</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% let total=0, i=0 ;users.forEach(user=> { i++; total = total +
+            user.Amount;%>
+            <tr>
+              <td><%= i%></td>
+              <td><%= user.Name %></td>
+              <td>
+                <%= user.Moneydonatedate.toLocaleString('en-IN', {timeZone:
+                'Asia/Kolkata'}) %>
+              </td>
+              <td><%= user.Purpose %></td>
+              <td>Rs <%= user.Amount %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" style="text-align: center; font-weight: bold">
+                Total
+              </td>
+              <td>Rs <%= total%></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="donate-goods">
+        <h3>Goods Donation List</h3>
+        <table>
+          <thead>
+            <tr>
+              <td>S.no.</td>
+              <td>Name</td>
+              <td>Address</td>
+              <td>Options</td>
+              <td>Date</td>
+              <td>Image</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% goods.forEach((good, index)=> { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= good.Name %></td>
+              <td><%= good.Address %></td>
+              <td><%= good.Options %></td>
+              <td>
+                <%= good.Goodsdonatedate.toLocaleString('en-IN', {timeZone:
+                'Asia/Kolkata'}) %>
+              </td>
+              <td>
+                <img
+                  height="70px"
+                  src="/uploads/<%= good.image%>"
+                  alt="<%= good.Options%>"
+                />
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <footer>
+      <div id="pageDetails">
+        <div id="address">
+          <p>
+            BSA College of Engineering and Technology, Mathura(U.P.), 281001
+          </p>
+          <p>+91 639 773 5039, +91 750 523 2183</p>
+          <p>
+            <a href="http://www.bsacet.org/">www.bsacet.org</a>
+          </p>
+        </div>
+        <div id="socialmedia">
+          <p style="color: white; font-size: 1.5vw">Our social plateforms</p>
+          <a href="/"><img src="/images/facebook.png" alt="facebook" /></a>
+          <a href="/"><img src="/images/instagram.png" alt="instaram" /></a>
+          <a href="/"><img src="/images/twitter.png" alt="twitter" /></a>
+          <a href="/"><img src="/images/youtube.png" alt="youtube" /></a>
+        </div>
+      </div>
+      <div id="copyright">
+        Copyright © 2023 Insider Inc. All rights reserved. Registration on or
+        use of this site constitutes acceptance of our Terms of Service, Privacy
+        Policy and Cookies Policy.
+      </div>
+    </footer>
+    <script>
+      let hamburger = document.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", () => {
+        let navBar = document.querySelector(".nav-bar");
+        navBar.classList.toggle("active");
+        let line1 = document.querySelector(".line1");
+        line1.classList.toggle("single-line");
+        let line2 = document.querySelector(".line2");
+        line2.classList.toggle("single-line");
+      });
+      var clickMenu = document.getElementById("clickMenu");
+      var dropLogout = document.getElementById("drop-logout");
+
+      clickMenu.onclick = () => {
+        if (dropLogout.style.display == "none") {
+          dropLogout.style.display = "block";
+          dropLogout.style.position = "inherit;";
+          dropLogout.style.top = "51px";
+          dropLogout.style.backgroundColor = "#2dcbff";
+          dropLogout.style.padding = "10px";
+          dropLogout.style.width = "130px";
+        } else {
+          dropLogout.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>

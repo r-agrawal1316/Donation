@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/contact.css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <title>Contact</title>
+  </head>
+
+  <body>
+    <%- include ('navbar', {displayUser: displayUser}) %>
+    <section>
+      <div class="news">
+        <h1 class="commonheadingsize">Contact Us</h1>
+        <p class="commonsubheadingsize">
+          We would love to have you in community. Feel free to get in touch with
+          us.
+        </p>
+      </div>
+      <div id="contactform">
+        <div id="detailsform">
+          <div id="error_message"></div>
+          <form
+            action="/contact"
+            method="post"
+            id="form"
+            onsubmit="return validate();"
+          >
+            <div class="entry">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                name="Name"
+                id="name"
+                placeholder="Enter Name"
+              />
+            </div>
+            <div class="entry">
+              <label for="phone">Phone</label>
+              <input
+                type="text"
+                name="Phone"
+                id="phone"
+                placeholder="9999999999"
+              />
+            </div>
+            <div class="entry">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                name="Email"
+                id="email"
+                placeholder="example@gmail.com"
+              />
+            </div>
+            <div class="entry">
+              <label for="state">State</label>
+              <select id="state" name="State">
+                <option value="">Select a state...</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+              </select>
+            </div>
+            <div id="messageContainer">
+              <label for="message">Message</label>
+              <textarea
+                name="Message"
+                id="message"
+                cols="30"
+                rows="10"
+                style="resize: none"
+              ></textarea>
+            </div>
+            <div class="entry">
+              <button type="submit" class="formbutton">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div id="contactaddress">
+          <h2 style="margin-bottom: 1vw">Reach Us</h2>
+          <p><b>Email:-</b> donatedotin@gmail.com</p>
+          <p><b>Phone:-</b> No. +91 8439192727</p>
+          <p>BSA College of Engineering and Technology,</p>
+          <p>Mathura(U.P.), 281001</p>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+      <div id="pageDetails">
+        <div id="address">
+          <p>
+            BSA College of Engineering and Technology, Mathura(U.P.), 281001
+          </p>
+          <p>+91 639 773 5039, +91 750 523 2183</p>
+          <p>
+            <a href="http://www.bsacet.org/">www.bsacet.org</a>
+          </p>
+        </div>
+        <div id="socialmedia">
+          <p>Our social plateforms</p>
+          <a href="/"><img src="/images/facebook.png" alt="facebook" /></a>
+          <a href="/"><img src="/images/instagram.png" alt="instaram" /></a>
+          <a href="/"><img src="/images/twitter.png" alt="twitter" /></a>
+          <a href="/"><img src="/images/youtube.png" alt="youtube" /></a>
+        </div>
+      </div>
+      <div id="copyright">
+        Copyright © 2023 Insider Inc. All rights reserved. Registration on or
+        use of this site constitutes acceptance of our Terms of Service, Privacy
+        Policy and Cookies Policy.
+      </div>
+    </footer>
+    <script>
+      let hamburger = document.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", () => {
+        let navBar = document.querySelector(".nav-bar");
+        navBar.classList.toggle("active");
+        let line1 = document.querySelector(".line1");
+        line1.classList.toggle("single-line");
+        let line2 = document.querySelector(".line2");
+        line2.classList.toggle("single-line");
+      });
+      var clickMenu = document.getElementById("clickMenu");
+      var dropLogout = document.getElementById("drop-logout");
+
+      clickMenu.onclick = () => {
+        if (dropLogout.style.display == "none") {
+          dropLogout.style.display = "block";
+          dropLogout.style.position = "inherit";
+          dropLogout.style.top = "51px";
+          dropLogout.style.backgroundColor = "#2dcbff";
+          dropLogout.style.padding = "10px";
+          dropLogout.style.width = "130px";
+        } else {
+          dropLogout.style.display = "none";
+        }
+      };
+      function validate() {
+        var name = document.getElementById("name").value;
+        var phone = document.getElementById("phone").value;
+        var email = document.getElementById("email").value;
+        var error_message = document.getElementById("error_message");
+
+        error_message.style.padding = "10px";
+
+        var text;
+        if (name.length == 0) {
+          text = "Please Enter valid Name";
+          error_message.innerHTML = text;
+          return false;
+        }
+        if (isNaN(phone) || phone.length != 10) {
+          text = "Please Enter valid Phone Number";
+          error_message.innerHTML = text;
+          return false;
+        }
+        if (email.indexOf("@") == -1 || email.length < 6) {
+          text = "Please Enter valid Email";
+          error_message.innerHTML = text;
+          return false;
+        }
+
+        error_message.style.backgroundColor = "green";
+        text = "Your contact has been stored. we will contact you soon..";
+        error_message.innerHTML = text;
+        return true;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <title>Login</title>
+  </head>
+
+  <body>
+    <%- include ('navbar', {displayUser: displayUser}) %>
+    <header></header>
+    <div class="foot"></div>
+    <div class="center">
+      <div id="error_message"><%= isCorrect %></div>
+      <h1>Login</h1>
+      <form method="post" action="/login" onsubmit="return true">
+        <div class="txt-field">
+          <input type="text" name="Username" id="Username" required />
+          <span></span>
+          <label>Username/Email</label>
+        </div>
+        <div class="txt-field">
+          <input type="password" name="Password" id="Password" required />
+          <span></span>
+          <label>Password</label>
+        </div>
+        <div class="userType">
+          <label>
+            <input type="radio" name="userType" value="user" checked /> User
+          </label>
+          <label>
+            <input type="radio" name="userType" value="admin" /> Admin
+          </label>
+        </div>
+        <br />
+        <div class="pass"><a href="/forgotPassword">Forgot Password?</a></div>
+        <input type="submit" value="Login" />
+        <div class="signup_link">
+          Not a member? <a href="/SignUp">SignUp</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer-->
+    <footer>
+      <div id="pageDetails">
+        <div id="address">
+          <p>
+            BSA College of Engineering and Technology, Mathura(U.P.), 281001
+          </p>
+          <p>+91 639 773 5039, +91 750 523 2183</p>
+          <p>
+            <a href="http://www.bsacet.org/">www.bsacet.org</a>
+          </p>
+        </div>
+        <div id="socialmedia">
+          <p style="color: white; font-size: 1.5vw">Our social plateforms</p>
+          <a href="/"><img src="/images/facebook.png" alt="facebook" /></a>
+          <a href="/"><img src="/images/instagram.png" alt="instaram" /></a>
+          <a href="/"><img src="/images/twitter.png" alt="twitter" /></a>
+          <a href="/"><img src="/images/youtube.png" alt="youtube" /></a>
+        </div>
+      </div>
+      <div id="copyright">
+        Copyright © 2023 Insider Inc. All rights reserved. Registration on or
+        use of this site constitutes acceptance of our Terms of Service, Privacy
+        Policy and Cookies Policy.
+      </div>
+    </footer>
+    <script>
+      let hamburger = document.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", () => {
+        let navBar = document.querySelector(".nav-bar");
+        navBar.classList.toggle("active");
+        let line1 = document.querySelector(".line1");
+        line1.classList.toggle("single-line");
+        let line2 = document.querySelector(".line2");
+        line2.classList.toggle("single-line");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users</title>
+    <link rel="stylesheet" href="/css/users.css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+  </head>
+
+  <body>
+    <%- include('../admin-navbar', {displayUser: displayUser}) %>
+
+    <h1>Users</h1>
+    <div class="users">
+      <table>
+        <thead>
+          <tr>
+            <th>S.no.</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Admin</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach((user, index)=> { %>
+          <tr>
+            <td><%= index+1 %></td>
+            <td><%= user.Name %></td>
+            <td><%= user.Email %></td>
+            <form method="POST">
+              <input type="hidden" name="Email" value="<%= user.Email %>" />
+              <td>
+                <input class="checkbox" type="checkbox" name="isAdmin"
+                <%=user.isAdmin ? 'checked' : '' %>>
+              </td>
+              <td id="displayBtn">
+                <button
+                  formaction="/admin/updateUserAdminStatus"
+                  class="commonButton"
+                  type="submit"
+                >
+                  Save
+                </button>
+                <button
+                  style="margin-left: 5px"
+                  formaction="/admin/deleteUser"
+                  class="commonButtonDel"
+                  onclick="confirm('Are you sure you want to delete this user?');"
+                  type="submit"
+                >
+                  Delete
+                </button>
+              </td>
+            </form>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <footer>
+      <div id="pageDetails">
+        <div id="address">
+          <p>
+            BSA College of Engineering and Technology, Mathura(U.P.), 281001
+          </p>
+          <p>+91 639 773 5039, +91 750 523 2183</p>
+          <p>
+            <a href="http://www.bsacet.org/">www.bsacet.org</a>
+          </p>
+        </div>
+        <div id="socialmedia">
+          <p style="color: white; font-size: 1.5vw">Our social plateforms</p>
+          <a href="/"><img src="/images/facebook.png" alt="facebook" /></a>
+          <a href="/"><img src="/images/instagram.png" alt="instaram" /></a>
+          <a href="/"><img src="/images/twitter.png" alt="twitter" /></a>
+          <a href="/"><img src="/images/youtube.png" alt="youtube" /></a>
+        </div>
+      </div>
+      <div id="copyright">
+        Copyright © 2023 Insider Inc. All rights reserved. Registration on or
+        use of this site constitutes acceptance of our Terms of Service, Privacy
+        Policy and Cookies Policy.
+      </div>
+    </footer>
+
+    <script>
+      let hamburger = document.querySelector(".hamburger");
+
+      hamburger.addEventListener("click", () => {
+        let navBar = document.querySelector(".nav-bar");
+        navBar.classList.toggle("active");
+        let line1 = document.querySelector(".line1");
+        line1.classList.toggle("single-line");
+        let line2 = document.querySelector(".line2");
+        line2.classList.toggle("single-line");
+      });
+      var clickMenu = document.getElementById("clickMenu");
+      var dropLogout = document.getElementById("drop-logout");
+
+      clickMenu.onclick = () => {
+        if (dropLogout.style.display == "none") {
+          dropLogout.style.display = "block";
+          dropLogout.style.position = "inherit;";
+          dropLogout.style.top = "51px";
+          dropLogout.style.backgroundColor = "#2dcbff";
+          dropLogout.style.padding = "10px";
+          dropLogout.style.width = "130px";
+        } else {
+          dropLogout.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
